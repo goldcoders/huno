@@ -1,0 +1,15 @@
+/.cache/
+.DS_Store
+/node_modules/
+lambda/
+.env
+/build/
+/dist/
+.vscode
+/.netlify/
+*.bak
+.env*
+!.env.example
+/public/
+.yarn/
+.vercel
