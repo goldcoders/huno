@@ -1,0 +1,23 @@
+{
+  "name": "goldcoders-oss",
+  "version": "1.0.0",
+  "description": "Hugo with UNOCSS",
+  "scripts": {
+    "uno-dev": "unocss \"layouts/**/**/*.html\" --watch -o ./assets/css/uno.css",
+    "hugo-dev": "hugo server  --disableFastRender",
+    "dev": "run-p hugo-dev uno-dev",
+    "hugo-build": "hugo --gc --minify",
+    "build": "run-p hugo-build"
+  },
+  "keywords": [
+    "unocss"
+  ],
+  "author": "Uriah",
+  "license": "MIT",
+  "devDependencies": {
+    "@unocss/cli": "^0.22.6",
+    "@unocss/preset-uno": "^0.22.6",
+    "npm-run-all": "^4.1.5",
+    "unocss": "^0.22.6"
+  }
+}

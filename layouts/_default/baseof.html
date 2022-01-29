@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
+
+{{- partial "head.html" . -}}
+
+<body class="bg-gray-50 container mx-auto min-h-screen max-w-full flex flex-col justify-center">
+
+    {{- partial "dev-size-indicator.html" . -}}
+
+    {{- partial "navbar.html" . -}}
+
+    {{- block "main" . }}{{- end -}}
+
+    {{- partial "footer.html" . -}}
+
+    {{- block "scripts" . }}{{- end -}}
+
+</body>
+
+</html>

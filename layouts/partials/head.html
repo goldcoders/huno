@@ -1,0 +1,33 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>
+    {{ block "title" . }}
+    {{ .Site.Title -}} - {{- .Title }}
+    {{ end }}
+</title>
+
+{{- if .Description -}}
+<meta name="description" content="{{ .Description }}" />
+{{- end -}}
+
+{{- if .Keywords -}}
+<meta name="keywords" content="{{ delimit .Keywords " , " }}" />
+{{- end -}}
+
+{{- if .Params.Author -}}
+<meta name="author" content="{{ .Params.Author}}" />
+{{- end -}}
+
+{{ partial "templates/_internal/opengraph.html" . }}
+
+<meta name=”robots” content=”index, follow”>
+
+<link rel="shortcut icon" type="image/jpg" href="{{$.Site.Params.favicon | relURL}}" />
+
+{{- $unocss := resources.Match "css/*.css" | resources.Concat "css/main.css" -}}
+
+{{- if hugo.IsProduction }}
+{{ $unocss = $unocss | minify | fingerprint }}
+{{ end -}}
+<link rel="stylesheet" href="{{ $unocss.RelPermalink }}" {{ if hugo.IsProduction }}
+    integrity="{{ $unocss.Data.Integrity }}" {{ end }} />
