@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "Hugo with UNOCSS",
   "scripts": {
-    "uno-dev": "unocss \"layouts/**/**/*.html\" --watch -o ./assets/css/uno.css",
+    "uno-dev": "unocss \"layouts/**/**/*.html\" --watch -o ./assets/css/unocss/all.css",
+    "uno-app": "unocss \"layouts/_default/**/*.html\" \"layouts/partials/templates/**/*.html\" \"layouts/partials/dev-size-indicator.html\" \"layouts/partials/example-home.html\" \"layouts/partials/footer.html\" \"layouts/partials/head.html\" \"layouts/partials/navbar.html\" \"layouts/index.html\" --watch -o ./assets/css/unocss/main.css",
+    "uno-blog": "unocss \"layouts/_default/**/*.html\" \"layouts/partials/templates/**/*.html\" \"layouts/partials/dev-size-indicator.html\" \"layouts/partials/footer.html\" \"layouts/partials/head.html\" \"layouts/partials/navbar.html\" \"layouts/list.html\" --watch -o ./assets/css/unocss/blog.css",
     "hugo-dev": "hugo server  --disableFastRender",
+    "dev-optimized": "run-p hugo-dev uno-app uno-blog",
     "dev": "run-p hugo-dev uno-dev",
     "hugo-build": "hugo --gc --minify",
     "build": "run-p hugo-build"
@@ -19,5 +22,8 @@
     "@unocss/preset-uno": "^0.22.6",
     "npm-run-all": "^4.1.5",
     "unocss": "^0.22.6"
+  },
+  "dependencies": {
+    "unocss-preset-typography": "^0.4.0"
   }
 }

@@ -3,3 +3,8 @@ languageCode = "en-us"
 title = "Uno Hugo"
 [build]
 writeState = true
+
+[permalinks]
+blogs = "/blog/:slug/"
+products = "/products/:slug/"
+pages = "/:slug"

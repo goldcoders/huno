@@ -24,10 +24,25 @@
 
 <link rel="shortcut icon" type="image/jpg" href="{{$.Site.Params.favicon | relURL}}" />
 
-{{- $unocss := resources.Match "css/*.css" | resources.Concat "css/main.css" -}}
+{{ $resetCSS := resources.Get "css/reset.css" }}
+{{ $appCSS := resources.Get "css/unocss/main.css"  }}
+{{ $appStyle :=  slice $resetCSS $appCSS | resources.Concat "css/main.css" }}
+
+{{ $blogCSS := resources.Get "css/unocss/blog.css"  }}
+{{ $blogStyle :=  slice $resetCSS $blogCSS | resources.Concat "css/blog.css" }}
 
 {{- if hugo.IsProduction }}
-{{ $unocss = $unocss | minify | fingerprint }}
+{{ $appStyle = $appStyle | minify | fingerprint }}
+{{ $blogStyle = $blogStyle | minify | fingerprint }}
 {{ end -}}
-<link rel="stylesheet" href="{{ $unocss.RelPermalink }}" {{ if hugo.IsProduction }}
-    integrity="{{ $unocss.Data.Integrity }}" {{ end }} />
+
+{{if .IsHome}}
+<link rel="stylesheet" href="{{ $appStyle.RelPermalink }}" {{ if hugo.IsProduction }}
+    integrity="{{ $appStyle.Data.Integrity }}" {{ end }} />
+{{end}}
+
+{{if eq .Section "blog"}}
+<link rel="stylesheet" href="{{ $appStyle.RelPermalink }}" {{ if hugo.IsProduction }}
+    integrity="{{ $appStyle.Data.Integrity }}" {{ end }} />
+{{end}}
+
